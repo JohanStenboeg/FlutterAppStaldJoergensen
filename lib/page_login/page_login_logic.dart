@@ -8,22 +8,34 @@ Color cBrown = const Color.fromARGB(0xFF, 0x5D, 0x3C, 0x14);
 
 class Page_LoginLogic extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return _PageLoginState();
-  }
+  _PageLoginState createState() => _PageLoginState();
 }
 
 class _PageLoginState extends State<Page_LoginLogic> {
+  TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
+
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        Container(
-          //Login
-          margin: EdgeInsets.all(10.0),
-          child: RaisedButton(
+      children: <Widget>[
+        TextField(
+          obscureText: false,
+          style: style,
+          decoration: InputDecoration(
+              contentPadding: EdgeInsets.all(20.0),
+              hintText: "Email",
+          )
+        ),
+        TextField(
+          obscureText: true,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.all(20.0),
+            hintText: "Password",
+          ),
+        ),
+        //Login
+          RaisedButton(
             onPressed: () {
-              
             },
             child: Text(
               'Login',
@@ -37,8 +49,10 @@ class _PageLoginState extends State<Page_LoginLogic> {
             elevation: 2.0,
             splashColor: cGreen,
           ),
-        ),
       ],
     );
   }
-}
+        
+     
+  }
+

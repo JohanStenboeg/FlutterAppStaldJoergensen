@@ -10,12 +10,6 @@ class Page_LoginDesign extends StatelessWidget {
     return Column(
       children: <Widget>[
         Image.asset('assets/logo.png'),
-        Text(
-          'Login',
-          style: TextStyle(color: cBrown, fontSize: 15),
-          textAlign: TextAlign.center,
-        ),
-        
         
       ],
     );

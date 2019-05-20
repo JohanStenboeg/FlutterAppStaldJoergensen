@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:staldjoergensen/main.dart';
 
-
-
 //COLORS
 Color cGreen = const Color.fromARGB(0xFF, 0x5E, 0xA7, 0x4F);
 Color cCream = const Color.fromARGB(0xFF, 0xF8, 0xF2, 0xD9);
@@ -27,8 +25,8 @@ class _PageStartState extends State<Page_Start_Logic> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Page_Login()),);
-              
+                MaterialPageRoute(builder: (context) => Page_Login()),
+              );
             },
             child: Text(
               'Login',
@@ -50,7 +48,8 @@ class _PageStartState extends State<Page_Start_Logic> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Page_CreateUser()),);
+                MaterialPageRoute(builder: (context) => Page_CreateUser()),
+              );
             },
             child: Text(
               'Opret Bruger',
