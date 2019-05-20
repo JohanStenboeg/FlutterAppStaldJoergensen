@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Page_CreateUserDesign extends StatelessWidget {
   Color cGreen = const Color.fromARGB(0xFF, 0x5E, 0xA7, 0x4F);
@@ -9,9 +10,15 @@ class Page_CreateUserDesign extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Image.asset('assets/logo.png'),
-        
-        
+        Container(
+          child: Align(
+            alignment: Alignment.topRight,
+            child: Image.asset(
+              'assets/logo.png',
+              scale: 3,
+            ),
+          ),
+        ),
         
       ],
     );

@@ -19,25 +19,25 @@ Color cBrown = const Color.fromARGB(0xFF, 0x5D, 0x3C, 0x14);
 void main() => runApp(Page_Start());
 
 class Page_Start extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Stald Jørgensen',
         theme: new ThemeData(scaffoldBackgroundColor: cCream),
         home: Scaffold(
-            appBar: AppBar(
-              actions: <Widget>[],
-              backgroundColor: cGreen,
+          appBar: AppBar(
+            actions: <Widget>[],
+            backgroundColor: cGreen,
+          ),
+          body: Container(
+            child: ListView(
+              children: <Widget>[
+                Page_StartDesign(),
+                Page_Start_Logic(),
+              ],
             ),
-            body: Container(
-              child: Column(
-                children: <Widget>[
-                  Page_StartDesign(),
-                  Page_Start_Logic(),
-                ],
-              ),
-            )));
+          ),
+        ));
   }
 }
 
@@ -53,7 +53,7 @@ class Page_Login extends StatelessWidget {
               backgroundColor: cGreen,
             ),
             body: Container(
-              child: Column(
+              child: ListView(
                 children: <Widget>[
                   Page_LoginDesign(),
                   Page_LoginLogic(),
@@ -71,15 +71,15 @@ class Page_CreateUser extends StatelessWidget {
         theme: new ThemeData(scaffoldBackgroundColor: cCream),
         home: Scaffold(
             appBar: AppBar(
-              actions: <Widget>[
-                Page_CreateUserDesign(),
-                Page_CreateUserLogic(),
-              ],
+              actions: <Widget>[],
               backgroundColor: cGreen,
             ),
             body: Container(
-              child: Column(
-                children: <Widget>[],
+              child: ListView(
+                children: <Widget>[
+                  Page_CreateUserDesign(),
+                  Page_CreateUserLogic(),
+                ],
               ),
             )));
   }

@@ -18,16 +18,34 @@ class _Page_CreateUserState extends State<Page_CreateUserLogic> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Text("Fornavn(e)"),
+        TextField(),
+        Text("Efternavn"),
+        TextField(),
+        Text("Email"),
+        TextField(),
+        Text("Telefon Nummer"),
+        TextField(maxLength: 8),
+        Text("Kodeord"),
+        TextField(),
         Container(
-          //Login
+          //Opret Bruger
           margin: EdgeInsets.all(10.0),
+
           child: RaisedButton(
             onPressed: () {
-              
-              
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Page_Login()),);
+              return showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                        content: Text("Din bruger er nu oprettet."));
+                  });
             },
             child: Text(
-              'Login',
+              'Opret Bruger',
               style: TextStyle(
                 color: cBrown,
                 fontSize: 20,
