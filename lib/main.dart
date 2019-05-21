@@ -28,9 +28,9 @@ Color cGreen = const Color.fromARGB(0xFF, 0x5E, 0xA7, 0x4F);
 Color cCream = const Color.fromARGB(0xFF, 0xF8, 0xF2, 0xD9);
 Color cBrown = const Color.fromARGB(0xFF, 0x5D, 0x3C, 0x14);
 
-void main() => runApp(Page_Start());
+void main() => runApp(PageStart());
 
-class Page_Start extends StatelessWidget {
+class PageStart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -44,8 +44,8 @@ class Page_Start extends StatelessWidget {
           body: Container(
             child: ListView(
               children: <Widget>[
-                Page_StartDesign(),
-                Page_Start_Logic(),
+                PageStartDesign(),
+                PageStartLogic(),
               ],
             ),
           ),
@@ -53,7 +53,7 @@ class Page_Start extends StatelessWidget {
   }
 }
 
-class Page_Login extends StatelessWidget {
+class PageLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -67,15 +67,15 @@ class Page_Login extends StatelessWidget {
             body: Container(
               child: ListView(
                 children: <Widget>[
-                  Page_LoginDesign(),
-                  Page_LoginLogic(),
+                  PageLoginDesign(),
+                  PageLoginLogic(),
                 ],
               ),
             )));
   }
 }
 
-class Page_CreateUser extends StatelessWidget {
+class PageCreateUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -89,15 +89,15 @@ class Page_CreateUser extends StatelessWidget {
             body: Container(
               child: ListView(
                 children: <Widget>[
-                  Page_CreateUserDesign(),
-                  Page_CreateUserLogic(),
+                  PageCreateUserDesign(),
+                  PageCreateUserLogic(),
                 ],
               ),
             )));
   }
 }
 
-class Page_Home extends StatelessWidget {
+class PageHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -113,15 +113,15 @@ class Page_Home extends StatelessWidget {
             body: Container(
               child: ListView(
                 children: <Widget>[
-                  Page_HomeDesign(),
-                  Page_HomeLogic(),
+                  PageHomeDesign(),
+                  PageHomeLogic(),
                 ],
               ),
             )));
   }
 }
 
-class Page_ShowHorse extends StatelessWidget {
+class PageShowHorse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -135,14 +135,14 @@ class Page_ShowHorse extends StatelessWidget {
             body: Container(
               child: ListView(
                 children: <Widget>[
-                  Page_ShowHorseDesign(),
-                  Page_ShowHorseLogic(),
+                  PageShowHorseDesign(),
+                  PageShowHorseLogic(),
                 ],
               ),
             )));
   }
 }
-class Page_AddHorse extends StatelessWidget {
+class PageAddHorse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -156,8 +156,8 @@ class Page_AddHorse extends StatelessWidget {
             body: Container(
               child: ListView(
                 children: <Widget>[
-                  Page_AddHorseDesign(),
-                  Page_AddHorseLogic(),
+                  PageAddHorseDesign(),
+                  PageAddHorseLogic(),
                 ],
               ),
             )));

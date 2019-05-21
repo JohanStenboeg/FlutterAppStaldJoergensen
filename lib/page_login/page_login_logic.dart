@@ -6,12 +6,12 @@ Color cGreen = const Color.fromARGB(0xFF, 0x5E, 0xA7, 0x4F);
 Color cCream = const Color.fromARGB(0xFF, 0xF8, 0xF2, 0xD9);
 Color cBrown = const Color.fromARGB(0xFF, 0x5D, 0x3C, 0x14);
 
-class Page_LoginLogic extends StatefulWidget {
+class PageLoginLogic extends StatefulWidget {
   @override
   _PageLoginState createState() => _PageLoginState();
 }
 
-class _PageLoginState extends State<Page_LoginLogic> {
+class _PageLoginState extends State<PageLoginLogic> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
   @override
@@ -38,7 +38,7 @@ class _PageLoginState extends State<Page_LoginLogic> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Page_Home()),
+                MaterialPageRoute(builder: (context) => PageHome()),
               );
             },
             child: Text(

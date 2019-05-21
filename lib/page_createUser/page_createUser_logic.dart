@@ -6,14 +6,14 @@ Color cGreen = const Color.fromARGB(0xFF, 0x5E, 0xA7, 0x4F);
 Color cCream = const Color.fromARGB(0xFF, 0xF8, 0xF2, 0xD9);
 Color cBrown = const Color.fromARGB(0xFF, 0x5D, 0x3C, 0x14);
 
-class Page_CreateUserLogic extends StatefulWidget {
+class PageCreateUserLogic extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _Page_CreateUserState();
+    return _PageCreateUserState();
   }
 }
 
-class _Page_CreateUserState extends State<Page_CreateUserLogic> {
+class _PageCreateUserState extends State<PageCreateUserLogic> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,7 +36,7 @@ class _Page_CreateUserState extends State<Page_CreateUserLogic> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Page_Login()),);
+                MaterialPageRoute(builder: (context) => PageLogin()),);
               return showDialog(
                   context: context,
                   builder: (context) {

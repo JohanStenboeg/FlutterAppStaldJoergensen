@@ -6,12 +6,12 @@ Color cGreen = const Color.fromARGB(0xFF, 0x5E, 0xA7, 0x4F);
 Color cCream = const Color.fromARGB(0xFF, 0xF8, 0xF2, 0xD9);
 Color cBrown = const Color.fromARGB(0xFF, 0x5D, 0x3C, 0x14);
 
-class Page_AddHorseLogic extends StatefulWidget {
+class PageAddHorseLogic extends StatefulWidget {
   @override
-  _Page_AddHorseLogicState createState() => _Page_AddHorseLogicState();
+  _PageAddHorseLogicState createState() => _PageAddHorseLogicState();
 }
 
-class _Page_AddHorseLogicState extends State<Page_AddHorseLogic> {
+class _PageAddHorseLogicState extends State<PageAddHorseLogic> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
   @override
@@ -67,7 +67,7 @@ class _Page_AddHorseLogicState extends State<Page_AddHorseLogic> {
           onPressed: () {
             Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Page_ShowHorse()),);
+                MaterialPageRoute(builder: (context) => PageShowHorse()),);
               return showDialog(
                   context: context,
                   builder: (context) {
