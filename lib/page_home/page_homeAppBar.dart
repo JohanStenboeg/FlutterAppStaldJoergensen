@@ -19,7 +19,7 @@ class NavigationDrawerState extends State<NavigationDrawerDemo> {
 
   Widget _getDrawerItemScreen(int pos)  => FirstScreen(drawerItem: drawerItems[_selectedIndex]); 
 
-  Widget _onSelectItem(int index) {
+  void _onSelectItem(int index) {
     setState(() {
       _selectedIndex = index;
       _getDrawerItemScreen(_selectedIndex);
