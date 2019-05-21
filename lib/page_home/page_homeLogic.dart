@@ -6,43 +6,29 @@ Color cGreen = const Color.fromARGB(0xFF, 0x5E, 0xA7, 0x4F);
 Color cCream = const Color.fromARGB(0xFF, 0xF8, 0xF2, 0xD9);
 Color cBrown = const Color.fromARGB(0xFF, 0x5D, 0x3C, 0x14);
 
-class Page_LoginLogic extends StatefulWidget {
+class Page_HomeLogic extends StatefulWidget {
   @override
-  _PageLoginState createState() => _PageLoginState();
+  _HomeLogicState createState() => _HomeLogicState();
 }
 
-class _PageLoginState extends State<Page_LoginLogic> {
+class _HomeLogicState extends State<Page_HomeLogic> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        TextField(
-          obscureText: false,
-          style: style,
-          decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(20.0),
-              hintText: "Email",
-          )
-        ),
-        TextField(
-          obscureText: true,
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(20.0),
-            hintText: "Password",
-          ),
-        ),
-        //Login
+        
+        //Opret Hest
           RaisedButton(
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Page_Home()),
+                MaterialPageRoute(builder: (context) => Page_ShowHorse()),
               );
             },
             child: Text(
-              'Login',
+              'Tilføj Hest',
               style: TextStyle(
                 color: cBrown,
                 fontSize: 20,

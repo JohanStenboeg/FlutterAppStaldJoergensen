@@ -6,10 +6,22 @@ import 'package:staldjoergensen/page_createUser/page_createUser_design.dart';
 import 'package:staldjoergensen/page_createUser/page_createUser_logic.dart';
 
 //Import from other folders
+//Start Page
 import 'package:staldjoergensen/page_start/page_start_logic.dart';
 import 'package:staldjoergensen/page_start/page_start_design.dart';
+//Login Page
 import 'package:staldjoergensen/page_login/page_login_design.dart';
 import 'package:staldjoergensen/page_login/page_login_logic.dart';
+//Home Page
+import 'package:staldjoergensen/page_home/page_homeDesign.dart';
+import 'package:staldjoergensen/page_home/page_homeLogic.dart';
+import 'package:staldjoergensen/page_home/page_homeAppBar.dart';
+//AddHorse Page
+import 'package:staldjoergensen/page_addHorse/page_addHorseDesign.dart';
+import 'package:staldjoergensen/page_addHorse/page_addHorseLogic.dart';
+//ShowHorse Page
+import 'package:staldjoergensen/page_showHorse/page_showHorseDesign.dart';
+import 'package:staldjoergensen/page_showHorse/page_showHorseLogic.dart';
 
 //COLORS
 Color cGreen = const Color.fromARGB(0xFF, 0x5E, 0xA7, 0x4F);
@@ -84,3 +96,71 @@ class Page_CreateUser extends StatelessWidget {
             )));
   }
 }
+
+class Page_Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Stald Jørgensen',
+        theme: new ThemeData(scaffoldBackgroundColor: cCream),
+        home: Scaffold(
+            appBar: AppBar(
+              actions: <Widget>[
+                NavigationDrawerDemo(),
+              ],
+              backgroundColor: cGreen,
+            ),
+            body: Container(
+              child: ListView(
+                children: <Widget>[
+                  Page_HomeDesign(),
+                  Page_HomeLogic(),
+                ],
+              ),
+            )));
+  }
+}
+
+class Page_ShowHorse extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Stald Jørgensen',
+        theme: new ThemeData(scaffoldBackgroundColor: cCream),
+        home: Scaffold(
+            appBar: AppBar(title: new Text("Tilføjede Heste"),
+              actions: <Widget>[],
+              backgroundColor: cGreen,
+            ),
+            body: Container(
+              child: ListView(
+                children: <Widget>[
+                  Page_ShowHorseDesign(),
+                  Page_ShowHorseLogic(),
+                ],
+              ),
+            )));
+  }
+}
+class Page_AddHorse extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Stald Jørgensen',
+        theme: new ThemeData(scaffoldBackgroundColor: cCream),
+        home: Scaffold(
+            appBar: AppBar(title: new Text("Tilføj Hest"),
+              actions: <Widget>[],
+              backgroundColor: cGreen,
+            ),
+            body: Container(
+              child: ListView(
+                children: <Widget>[
+                  Page_AddHorseDesign(),
+                  Page_AddHorseLogic(),
+                ],
+              ),
+            )));
+  }
+}
+//

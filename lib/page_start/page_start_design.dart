@@ -24,7 +24,10 @@ class Page_StartDesign extends StatelessWidget {
           ' & TJ Eventing',
           style: TextStyle(color: cBrown, fontSize: 40),
           textAlign: TextAlign.center,
+          
         ),
+        
+        
       ],
     );
   }
