@@ -226,7 +226,7 @@ class PageShowHorse extends StatelessWidget {
               },
             ),
             ListTile(
-              trailing: Icon(Icons.keyboard_arrow_right),
+              
               leading: Icon(Icons.book),
               title: Text('Book Træning'),
               onTap: () {
@@ -237,6 +237,7 @@ class PageShowHorse extends StatelessWidget {
               },
             ),
             ListTile(
+              trailing: Icon(Icons.keyboard_arrow_right),
               leading: Icon(Icons.pets),
               title: Text('Tilføj Hest'),
               onTap: () {
@@ -384,6 +385,7 @@ class PageBooking extends StatelessWidget {
               },
             ),
             ListTile(
+              trailing: Icon(Icons.keyboard_arrow_right),
               leading: Icon(Icons.book),
               title: Text('Book Træning'),
               onTap: () {
@@ -394,7 +396,7 @@ class PageBooking extends StatelessWidget {
               },
             ),
             ListTile(
-              trailing: Icon(Icons.keyboard_arrow_right),
+              
               leading: Icon(Icons.pets),
               title: Text('Tilføj Hest'),
               onTap: () {
@@ -473,7 +475,7 @@ class PageSettings extends StatelessWidget {
               },
             ),
             ListTile(
-              trailing: Icon(Icons.keyboard_arrow_right),
+              
               leading: Icon(Icons.pets),
               title: Text('Tilføj Hest'),
               onTap: () {
@@ -482,6 +484,7 @@ class PageSettings extends StatelessWidget {
               },
             ),
             ListTile(
+              trailing: Icon(Icons.keyboard_arrow_right),
               leading: Icon(Icons.settings),
               title: Text('Indstillinger'),
               onTap: () {
