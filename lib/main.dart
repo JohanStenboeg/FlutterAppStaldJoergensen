@@ -22,6 +22,8 @@ import 'package:staldjoergensen/page_addHorse/page_addHorseLogic.dart';
 //ShowHorse Page
 import 'package:staldjoergensen/page_showHorse/page_showHorseDesign.dart';
 import 'package:staldjoergensen/page_showHorse/page_showHorseLogic.dart';
+//Drawer
+import 'package:staldjoergensen/Drawer.dart';
 
 //COLORS
 Color cGreen = const Color.fromARGB(0xFF, 0x5E, 0xA7, 0x4F);
@@ -100,24 +102,58 @@ class PageCreateUser extends StatelessWidget {
 class PageHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Stald Jørgensen',
-        theme: new ThemeData(scaffoldBackgroundColor: cCream),
-        home: Scaffold(
-            appBar: AppBar(
-              actions: <Widget>[
-                NavigationDrawerDemo(),
-              ],
-              backgroundColor: cGreen,
-            ),
-            body: Container(
-              child: ListView(
-                children: <Widget>[
-                  PageHomeDesign(),
-                  PageHomeLogic(),
-                ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Stald Jørgensen"),
+        backgroundColor: cGreen,
+      ),
+      backgroundColor: cCream,
+      body: Container(
+          child: ListView(
+        children: <Widget>[
+          PageHomeDesign(),
+          PageHomeLogic(),
+        ],
+      )),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: cGreen,
               ),
-            )));
+            ),
+            ListTile(
+              title: Text('Hjem'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PageHome()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text('Book Træning'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PageShowHorse()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text('Tilføj Hest'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PageShowHorse()));
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -128,7 +164,8 @@ class PageShowHorse extends StatelessWidget {
         title: 'Stald Jørgensen',
         theme: new ThemeData(scaffoldBackgroundColor: cCream),
         home: Scaffold(
-            appBar: AppBar(title: new Text("Tilføjede Heste"),
+            appBar: AppBar(
+              title: new Text("Tilføjede Heste"),
               actions: <Widget>[],
               backgroundColor: cGreen,
             ),
@@ -142,6 +179,7 @@ class PageShowHorse extends StatelessWidget {
             )));
   }
 }
+
 class PageAddHorse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -149,7 +187,8 @@ class PageAddHorse extends StatelessWidget {
         title: 'Stald Jørgensen',
         theme: new ThemeData(scaffoldBackgroundColor: cCream),
         home: Scaffold(
-            appBar: AppBar(title: new Text("Tilføj Hest"),
+            appBar: AppBar(
+              title: new Text("Tilføj Hest"),
               actions: <Widget>[],
               backgroundColor: cGreen,
             ),
@@ -163,4 +202,4 @@ class PageAddHorse extends StatelessWidget {
             )));
   }
 }
-//
+
