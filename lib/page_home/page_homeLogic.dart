@@ -19,26 +19,7 @@ class _HomeLogicState extends State<PageHomeLogic> {
     return Column(
       children: <Widget>[
         
-        //Opret Hest
-          RaisedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PageShowHorse()),
-              );
-            },
-            child: Text(
-              'Tilføj Hest',
-              style: TextStyle(
-                color: cBrown,
-                fontSize: 20,
-              ),
-            ),
-            shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(50.0)),
-            elevation: 2.0,
-            splashColor: cGreen,
-          ),
+       
       ],
     );
   }

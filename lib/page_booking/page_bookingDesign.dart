@@ -10,10 +10,17 @@ class PageBookingDesign extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Image.asset('assets/logo.png'),
-        Text("Booking",
-          style: TextStyle(color: cBrown, fontSize: 40),
-          textAlign: TextAlign.center, )        
+        Container(
+          child: Align(
+            alignment: Alignment.topRight,
+            child: Image.asset(
+              'assets/logo.png',
+              scale: 3,
+            ),
+          ),
+        ),
+        
+        
         
       ],
     );
