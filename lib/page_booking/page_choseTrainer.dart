@@ -12,7 +12,7 @@ class SettingsWidget extends StatefulWidget {
 class _SettingsWidgetState extends State<SettingsWidget> {
 
   List _cities =
-  ["Mikkel", "Tobias"];
+  ["Mikkel", "Tobias",];
 
   List<DropdownMenuItem<String>> _dropDownMenuItems;
   String _currentCity;
