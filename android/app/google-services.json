@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "898351602302",
+    "firebase_url": "https://staldjoergensenapp.firebaseio.com",
+    "project_id": "staldjoergensenapp",
+    "storage_bucket": "staldjoergensenapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898351602302:android:9d72c724e33b4a75",
+        "android_client_info": {
+          "package_name": "com.example.staldjoergensen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898351602302-qmfvgdoveirk7etb97tc5hkdel1dntkk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeb2nNt2oyccyImfNRfmVDm2xxbg3DOQ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898351602302-qmfvgdoveirk7etb97tc5hkdel1dntkk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

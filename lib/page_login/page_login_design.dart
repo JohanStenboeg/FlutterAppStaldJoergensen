@@ -9,7 +9,7 @@ class PageLoginDesign extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Image.asset('assets/logo.png'),
+        //Image.asset('assets/logo.png'),
         
       ],
     );

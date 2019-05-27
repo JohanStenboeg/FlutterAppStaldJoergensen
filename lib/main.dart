@@ -1,9 +1,12 @@
 //Imported from Web
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:staldjoergensen/page_createUser/page_createUser_design.dart';
 import 'package:staldjoergensen/page_createUser/page_createUser_logic.dart';
+import 'package:staldjoergensen/page_home/page_homeDesign.dart';
+import 'package:staldjoergensen/page_home/page_homeLogic.dart';
 
 //Import from other folders
 //Start Page
@@ -13,8 +16,6 @@ import 'package:staldjoergensen/page_start/page_start_design.dart';
 import 'package:staldjoergensen/page_login/page_login_design.dart';
 import 'package:staldjoergensen/page_login/page_login_logic.dart';
 //Home Page
-import 'package:staldjoergensen/page_home/page_homeDesign.dart';
-import 'package:staldjoergensen/page_home/page_homeLogic.dart';
 
 //AddHorse Page
 import 'package:staldjoergensen/page_addHorse/page_addHorseDesign.dart';
@@ -65,19 +66,8 @@ class PageLogin extends StatelessWidget {
     return MaterialApp(
         title: 'Stald Jørgensen',
         theme: new ThemeData(scaffoldBackgroundColor: cCream),
-        home: Scaffold(
-            appBar: AppBar(
-              actions: <Widget>[],
-              backgroundColor: cGreen,
-            ),
-            body: Container(
-              child: ListView(
-                children: <Widget>[
-                  PageLoginDesign(),
-                  PageLoginLogic(),
-                ],
-              ),
-            )));
+        home: PageLoginLogic(),
+        );
   }
 }
 
@@ -103,15 +93,20 @@ class PageCreateUser extends StatelessWidget {
   }
 }
 
-const String loggedInUser = "Johan";
+class PageHome extends StatefulWidget {
+  const PageHome({Key key, @required this.user}) : super(key: key);
+  final FirebaseUser user;
+  @override
+  _HomeState createState() => _HomeState();
+}
 
-class PageHome extends StatelessWidget {
+class _HomeState extends State<PageHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Stald Jørgensen"),
         backgroundColor: cGreen,
+        title: Text('Home'),
       ),
       backgroundColor: cCream,
       body: Container(
@@ -126,12 +121,91 @@ class PageHome extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              decoration: BoxDecoration(color: cGreen, ),
-              
-
+              decoration: BoxDecoration(
+                color: cGreen,
+              ),
               child: ListView(
                 children: <Widget>[
-                  Text(loggedInUser),
+
+                  Text("Bruger"),
+                  Text("Email ${widget.user.email}")
+                ],
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              trailing: Icon(Icons.keyboard_arrow_right),
+              title: Text('Hjem'),
+              onTap: () {
+                /*Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PageHome(
+                            user: null,
+                          )),
+                );*/
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.book),
+              title: Text('Book Træning'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PageBooking()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.pets),
+              title: Text('Tilføj Hest'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PageShowHorse()));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Indstillinger'),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PageSettings()));
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/*
+class PageHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Stald Jørgensen"),
+        backgroundColor: cGreen,
+      ),
+      backgroundColor: cCream,
+      body: Container(
+          child: ListView(
+        children: <Widget>[
+          PageHomeDesign(),
+          
+        ],
+      )),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: cGreen,
+              ),
+              child: ListView(
+                children: <Widget>[
                   Text("More text"),
                 ],
               ),
@@ -179,6 +253,8 @@ class PageHome extends StatelessWidget {
     );
   }
 }
+*/
+
 //Show Horse
 class PageShowHorse extends StatelessWidget {
   @override
@@ -205,60 +281,64 @@ class PageShowHorse extends StatelessWidget {
               padding: EdgeInsets.zero,
               children: <Widget>[
                 DrawerHeader(
-              decoration: BoxDecoration(color: cGreen, ),
-              
-
-              child: ListView(
-                children: <Widget>[
-                  Text(loggedInUser),
-                  Text("More text"),
-                ],
-              ),
+                  decoration: BoxDecoration(
+                    color: cGreen,
+                  ),
+                  child: ListView(
+                    children: <Widget>[
+                      Text("More text"),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text('Hjem'),
+                  onTap: () {
+                    /*Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PageHome(user: null,)),
+                    );*/
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.book),
+                  title: Text('Book Træning'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PageBooking()),
+                    );
+                  },
+                ),
+                ListTile(
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                  leading: Icon(Icons.pets),
+                  title: Text('Tilføj Hest'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PageShowHorse()));
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text('Indstillinger'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PageSettings()));
+                  },
+                ),
+              ],
             ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Hjem'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PageHome()),
-                );
-              },
-            ),
-            ListTile(
-              
-              leading: Icon(Icons.book),
-              title: Text('Book Træning'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PageBooking()),
-                );
-              },
-            ),
-            ListTile(
-              trailing: Icon(Icons.keyboard_arrow_right),
-              leading: Icon(Icons.pets),
-              title: Text('Tilføj Hest'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PageShowHorse()));
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Indstillinger'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PageSettings()));
-              },
-            ),
-          ],
-        ),
-      ),
+          ),
         ));
   }
 }
+
 //ADD HORSE
 class PageAddHorse extends StatelessWidget {
   @override
@@ -285,59 +365,66 @@ class PageAddHorse extends StatelessWidget {
               padding: EdgeInsets.zero,
               children: <Widget>[
                 DrawerHeader(
-              decoration: BoxDecoration(color: cGreen, ),
-              
-
-              child: ListView(
-                children: <Widget>[
-                  Text(loggedInUser),
-                  Text("More text"),
-                ],
-              ),
+                  decoration: BoxDecoration(
+                    color: cGreen,
+                  ),
+                  child: ListView(
+                    children: <Widget>[
+                      Text("More text"),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text('Hjem'),
+                  onTap: () {
+                    /*Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PageHome(
+                                user: null,
+                              )),
+                    );*/
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.book),
+                  title: Text('Book Træning'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PageBooking()),
+                    );
+                  },
+                ),
+                ListTile(
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                  leading: Icon(Icons.pets),
+                  title: Text('Tilføj Hest'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PageShowHorse()));
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text('Indstillinger'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PageSettings()));
+                  },
+                ),
+              ],
             ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Hjem'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PageHome()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.book),
-              title: Text('Book Træning'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PageBooking()),
-                );
-              },
-            ),
-            ListTile(
-              trailing: Icon(Icons.keyboard_arrow_right),
-              leading: Icon(Icons.pets),
-              title: Text('Tilføj Hest'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PageShowHorse()));
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Indstillinger'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PageSettings()));
-              },
-            ),
-          ],
-        ),
-      ),
+          ),
         ));
   }
 }
+
 //Booking
 class PageBooking extends StatelessWidget {
   @override
@@ -364,60 +451,66 @@ class PageBooking extends StatelessWidget {
               padding: EdgeInsets.zero,
               children: <Widget>[
                 DrawerHeader(
-              decoration: BoxDecoration(color: cGreen, ),
-              
-
-              child: ListView(
-                children: <Widget>[
-                  Text(loggedInUser),
-                  Text("More text"),
-                ],
-              ),
+                  decoration: BoxDecoration(
+                    color: cGreen,
+                  ),
+                  child: ListView(
+                    children: <Widget>[
+                      Text("More text"),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text('Hjem'),
+                  onTap: () {
+                    /*Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PageHome(
+                                user: null,
+                              )),
+                    );*/
+                  },
+                ),
+                ListTile(
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                  leading: Icon(Icons.book),
+                  title: Text('Book Træning'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PageBooking()),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.pets),
+                  title: Text('Tilføj Hest'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PageShowHorse()));
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text('Indstillinger'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PageSettings()));
+                  },
+                ),
+              ],
             ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Hjem'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PageHome()),
-                );
-              },
-            ),
-            ListTile(
-              trailing: Icon(Icons.keyboard_arrow_right),
-              leading: Icon(Icons.book),
-              title: Text('Book Træning'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PageBooking()),
-                );
-              },
-            ),
-            ListTile(
-              
-              leading: Icon(Icons.pets),
-              title: Text('Tilføj Hest'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PageShowHorse()));
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Indstillinger'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PageSettings()));
-              },
-            ),
-          ],
-        ),
-      ),
+          ),
         ));
   }
 }
+
 //Settings
 class PageSettings extends StatelessWidget {
   @override
@@ -444,57 +537,62 @@ class PageSettings extends StatelessWidget {
               padding: EdgeInsets.zero,
               children: <Widget>[
                 DrawerHeader(
-              decoration: BoxDecoration(color: cGreen, ),
-              
-
-              child: ListView(
-                children: <Widget>[
-                  Text(loggedInUser),
-                  Text("More text"),
-                ],
-              ),
+                  decoration: BoxDecoration(
+                    color: cGreen,
+                  ),
+                  child: ListView(
+                    children: <Widget>[
+                      Text("More text"),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text('Hjem'),
+                  onTap: () {
+                    /*Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PageHome(
+                                user: null,
+                              )),
+                    );*/
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.book),
+                  title: Text('Book Træning'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PageBooking()),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.pets),
+                  title: Text('Tilføj Hest'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PageShowHorse()));
+                  },
+                ),
+                ListTile(
+                  trailing: Icon(Icons.keyboard_arrow_right),
+                  leading: Icon(Icons.settings),
+                  title: Text('Indstillinger'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PageSettings()));
+                  },
+                ),
+              ],
             ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Hjem'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PageHome()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.book),
-              title: Text('Book Træning'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PageBooking()),
-                );
-              },
-            ),
-            ListTile(
-              
-              leading: Icon(Icons.pets),
-              title: Text('Tilføj Hest'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PageShowHorse()));
-              },
-            ),
-            ListTile(
-              trailing: Icon(Icons.keyboard_arrow_right),
-              leading: Icon(Icons.settings),
-              title: Text('Indstillinger'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PageSettings()));
-              },
-            ),
-          ],
-        ),
-      ),
+          ),
         ));
   }
 }

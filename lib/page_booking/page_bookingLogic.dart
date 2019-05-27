@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:staldjoergensen/main.dart';
+
 import 'package:staldjoergensen/page_booking/page_choseTrainer.dart';
+
+import '../main.dart';
+
+
 
 //COLORS
 Color cGreen = const Color.fromARGB(0xFF, 0x5E, 0xA7, 0x4F);
@@ -90,10 +94,10 @@ class _BookingLogicState extends State<PageBookingLogic> {
 
           child: RaisedButton(
             onPressed: () {
-              Navigator.push(
+              /*Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PageHome()),
-              );
+                MaterialPageRoute(builder: (context) => PageHome(user: null,)),
+              );*/
               return showDialog(
                   context: context,
                   builder: (context) {
