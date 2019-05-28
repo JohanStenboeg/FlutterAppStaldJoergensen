@@ -77,19 +77,8 @@ class PageCreateUser extends StatelessWidget {
     return MaterialApp(
         title: 'Stald Jørgensen',
         theme: new ThemeData(scaffoldBackgroundColor: cCream),
-        home: Scaffold(
-            appBar: AppBar(
-              actions: <Widget>[],
-              backgroundColor: cGreen,
-            ),
-            body: Container(
-              child: ListView(
-                children: <Widget>[
-                  PageCreateUserDesign(),
-                  PageCreateUserLogic(),
-                ],
-              ),
-            )));
+        home: PageCreateUserLogic(),
+        );
   }
 }
 

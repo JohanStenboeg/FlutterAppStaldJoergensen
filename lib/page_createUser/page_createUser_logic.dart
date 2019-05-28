@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
-import 'package:staldjoergensen/main.dart';
+
+import '../main.dart';
 
 //COLORS
 Color cGreen = const Color.fromARGB(0xFF, 0x5E, 0xA7, 0x4F);
@@ -8,56 +11,69 @@ Color cBrown = const Color.fromARGB(0xFF, 0x5D, 0x3C, 0x14);
 
 class PageCreateUserLogic extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return _PageCreateUserState();
-  }
+  _PageCreateUserLogicState createState() => _PageCreateUserLogicState();
 }
 
-class _PageCreateUserState extends State<PageCreateUserLogic> {
+class _PageCreateUserLogicState extends State<PageCreateUserLogic> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String _email, _password;
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text("Fornavn(e)"),
-        TextField(),
-        Text("Efternavn"),
-        TextField(),
-        Text("Email"),
-        TextField(),
-        Text("Telefon Nummer"),
-        TextField(maxLength: 8),
-        Text("Kodeord"),
-        TextField(),
-        Container(
-          //Opret Bruger
-          margin: EdgeInsets.all(10.0),
-
-          child: RaisedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PageLogin()),);
-              return showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                        content: Text("Din bruger er nu oprettet."));
-                  });
-            },
-            child: Text(
-              'Opret Bruger',
-              style: TextStyle(
-                color: cBrown,
-                fontSize: 20,
+    return new Scaffold(
+      appBar: new AppBar(),
+      body: Form(
+          key: _formKey,
+          child: ListView(
+            children: <Widget>[
+              Container(
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Image.asset(
+                    'assets/logo.png',
+                    scale: 3,
+                  ),
+                ),
               ),
-            ),
-            shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(50.0)),
-            elevation: 2.0,
-            splashColor: cGreen,
-          ),
-        ),
-      ],
+              TextFormField(
+                validator: (input) {
+                  if (input.isEmpty) {
+                    return 'Skriv din email';
+                  }
+                },
+                decoration: InputDecoration(labelText: 'Email'),
+                onSaved: (input) => _email = input,
+              ),
+              TextFormField(
+                validator: (input) {
+                  if (input.length < 6) {
+                    return 'Kodeord skal være på mindst 6 tegn';
+                  }
+                },
+                decoration: InputDecoration(labelText: 'Kodeord'),
+                onSaved: (input) => _password = input,
+                obscureText: true,
+              ),
+              RaisedButton(
+                onPressed: signUp,
+                child: Text('Opret bruger'),
+              ),
+            ],
+          )),
     );
+  }
+
+  void signUp() async {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      try {
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: _email, password: _password);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => PageLogin()));
+      } catch (e) {
+        print(e.message);
+      }
+    }
   }
 }
