@@ -64,10 +64,10 @@ class PageLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Stald Jørgensen',
-        theme: new ThemeData(scaffoldBackgroundColor: cCream),
-        home: PageLoginLogic(),
-        );
+      title: 'Stald Jørgensen',
+      theme: new ThemeData(scaffoldBackgroundColor: cCream),
+      home: PageLoginLogic(),
+    );
   }
 }
 
@@ -75,10 +75,10 @@ class PageCreateUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Stald Jørgensen',
-        theme: new ThemeData(scaffoldBackgroundColor: cCream),
-        home: PageCreateUserLogic(),
-        );
+      title: 'Stald Jørgensen',
+      theme: new ThemeData(scaffoldBackgroundColor: cCream),
+      home: PageCreateUserLogic(),
+    );
   }
 }
 
@@ -115,7 +115,6 @@ class _HomeState extends State<PageHome> {
               ),
               child: ListView(
                 children: <Widget>[
-
                   Text("Bruger"),
                   Text("Email ${widget.user.email}")
                 ],
@@ -126,13 +125,10 @@ class _HomeState extends State<PageHome> {
               trailing: Icon(Icons.keyboard_arrow_right),
               title: Text('Hjem'),
               onTap: () {
-                /*Navigator.push(
+                Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => PageHome(
-                            user: null,
-                          )),
-                );*/
+                  MaterialPageRoute(builder: (context) => PageHome()),
+                );
               },
             ),
             ListTile(
