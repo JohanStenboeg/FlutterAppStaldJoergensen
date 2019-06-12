@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:staldjoergensen/page_booking/page_choseTrainer.dart';
 
-import '../main.dart';
 
 
 

@@ -21,7 +21,8 @@ class _PageCreateUserLogicState extends State<PageCreateUserLogic> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(),
+      appBar: new AppBar(backgroundColor: cGreen,),
+      
       body: Form(
           key: _formKey,
           child: ListView(
@@ -56,7 +57,16 @@ class _PageCreateUserLogicState extends State<PageCreateUserLogic> {
               ),
               RaisedButton(
                 onPressed: signUp,
-                child: Text('Opret bruger'),
+                child: Text('Opret bruger',
+              style: TextStyle(
+                color: cBrown,
+                fontSize: 20,
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(50.0)),
+            elevation: 2.0,
+            splashColor: cGreen,
               ),
             ],
           )),
@@ -67,8 +77,9 @@ class _PageCreateUserLogicState extends State<PageCreateUserLogic> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       try {
-        await FirebaseAuth.instance
+        FirebaseUser user = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: _email, password: _password);
+        user.sendEmailVerification();       
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => PageLogin()));
       } catch (e) {

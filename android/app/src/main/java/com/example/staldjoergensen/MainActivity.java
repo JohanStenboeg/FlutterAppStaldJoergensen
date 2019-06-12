@@ -1,4 +1,4 @@
-package com.example.staldjoergensen;
+package com.jstenboeg.staldjoergensen;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

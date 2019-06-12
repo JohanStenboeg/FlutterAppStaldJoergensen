@@ -51,7 +51,16 @@ class _PageLoginState extends State<PageLoginLogic> {
               ),
               RaisedButton(
                 onPressed: signIn,
-                child: Text('Login'),
+                child: Text('Login',
+              style: TextStyle(
+                color: cBrown,
+                fontSize: 20,
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(20.20)),
+            elevation: 2.0,
+            splashColor: cGreen,
               ),
             ],
           )),

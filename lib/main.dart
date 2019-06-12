@@ -1,9 +1,9 @@
 //Imported from Web
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:staldjoergensen/page_createUser/page_createUser_design.dart';
 import 'package:staldjoergensen/page_createUser/page_createUser_logic.dart';
 import 'package:staldjoergensen/page_home/page_homeDesign.dart';
 import 'package:staldjoergensen/page_home/page_homeLogic.dart';
@@ -13,7 +13,6 @@ import 'package:staldjoergensen/page_home/page_homeLogic.dart';
 import 'package:staldjoergensen/page_start/page_start_logic.dart';
 import 'package:staldjoergensen/page_start/page_start_design.dart';
 //Login Page
-import 'package:staldjoergensen/page_login/page_login_design.dart';
 import 'package:staldjoergensen/page_login/page_login_logic.dart';
 //Home Page
 
@@ -60,6 +59,7 @@ class PageStart extends StatelessWidget {
   }
 }
 
+// PAGE Login************************************************************************************
 class PageLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -71,6 +71,7 @@ class PageLogin extends StatelessWidget {
   }
 }
 
+// PAGE Create User ************************************************************************************
 class PageCreateUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -82,14 +83,17 @@ class PageCreateUser extends StatelessWidget {
   }
 }
 
+// PAGE HOME ************************************************************************************
 class PageHome extends StatefulWidget {
-  const PageHome({Key key, @required this.user}) : super(key: key);
   final FirebaseUser user;
+  const PageHome({Key key, @required this.user}) : super(key: key);
+
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<PageHome> {
+  var user;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,6 +107,21 @@ class _HomeState extends State<PageHome> {
         children: <Widget>[
           PageHomeDesign(),
           PageHomeLogic(),
+          StreamBuilder<DocumentSnapshot>(
+            stream: Firestore.instance
+                .collection('users')
+                .document(widget.user.uid)
+                .snapshots(),
+            builder: (BuildContext context,
+                AsyncSnapshot<DocumentSnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else if (snapshot.hasData) {
+                return checkRole(snapshot.data);
+              }
+              return LinearProgressIndicator();
+            },
+          ),
         ],
       )),
       drawer: Drawer(
@@ -116,7 +135,8 @@ class _HomeState extends State<PageHome> {
               child: ListView(
                 children: <Widget>[
                   Text("Bruger"),
-                  Text("Email ${widget.user.email}")
+                  Text("Email ${widget.user.email}"),
+                  Text("UID ${widget.user.uid}")
                 ],
               ),
             ),
@@ -125,9 +145,8 @@ class _HomeState extends State<PageHome> {
               trailing: Icon(Icons.keyboard_arrow_right),
               title: Text('Hjem'),
               onTap: () {
-                Navigator.push(
+                Navigator.pop(
                   context,
-                  MaterialPageRoute(builder: (context) => PageHome()),
                 );
               },
             ),
@@ -162,85 +181,43 @@ class _HomeState extends State<PageHome> {
       ),
     );
   }
-}
 
-/*
-class PageHome extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Stald Jørgensen"),
-        backgroundColor: cGreen,
-      ),
-      backgroundColor: cCream,
-      body: Container(
-          child: ListView(
-        children: <Widget>[
-          PageHomeDesign(),
+  Center checkRole(DocumentSnapshot snapshot) {
+    if (snapshot.data == null) {
+      return Center(
+        child: Text('no data set in the userId document in firestore'),
+      );
+    }
+    if (snapshot.data['role'] == 'admin') {
+      return adminPage(snapshot);
+    } else {
+      return userPage(snapshot);
+    }
+  }
+
+  Center adminPage(DocumentSnapshot snapshot) {
+    return Center(
+        child: Text(
+      '${snapshot.data['role']} ${snapshot.data['name']}',
+      style: TextStyle(color: cBrown, fontSize: 40),
+      textAlign: TextAlign.center,
+    ));
+  }
+
+  Center userPage(DocumentSnapshot snapshot) {
+    return Center(
+      child: 
+          Text(snapshot.data['name'],
+              style: TextStyle(color: cBrown, fontSize: 40),
+              textAlign: TextAlign.center),
           
-        ],
-      )),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: cGreen,
-              ),
-              child: ListView(
-                children: <Widget>[
-                  Text("More text"),
-                ],
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              trailing: Icon(Icons.keyboard_arrow_right),
-              title: Text('Hjem'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PageHome()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.book),
-              title: Text('Book Træning'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PageBooking()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.pets),
-              title: Text('Tilføj Hest'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PageShowHorse()));
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Indstillinger'),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PageSettings()));
-              },
-            ),
-          ],
-        ),
-      ),
+        
+      
     );
   }
 }
-*/
 
-//Show Horse
+//Show Horse ************************************************************************************
 class PageShowHorse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -279,11 +256,8 @@ class PageShowHorse extends StatelessWidget {
                   leading: Icon(Icons.home),
                   title: Text('Hjem'),
                   onTap: () {
-                    /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PageHome(user: null,)),
-                    );*/
+                    Navigator.popUntil(context,
+                        ModalRoute.withName(Navigator.defaultRouteName));
                   },
                 ),
                 ListTile(
@@ -324,7 +298,7 @@ class PageShowHorse extends StatelessWidget {
   }
 }
 
-//ADD HORSE
+//ADD HORSE************************************************************************************
 class PageAddHorse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -363,13 +337,8 @@ class PageAddHorse extends StatelessWidget {
                   leading: Icon(Icons.home),
                   title: Text('Hjem'),
                   onTap: () {
-                    /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PageHome(
-                                user: null,
-                              )),
-                    );*/
+                    Navigator.popUntil(context,
+                        ModalRoute.withName(Navigator.defaultRouteName));
                   },
                 ),
                 ListTile(
@@ -410,7 +379,7 @@ class PageAddHorse extends StatelessWidget {
   }
 }
 
-//Booking
+//Booking ************************************************************************************
 class PageBooking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -449,13 +418,8 @@ class PageBooking extends StatelessWidget {
                   leading: Icon(Icons.home),
                   title: Text('Hjem'),
                   onTap: () {
-                    /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PageHome(
-                                user: null,
-                              )),
-                    );*/
+                    Navigator.popUntil(context,
+                        ModalRoute.withName(Navigator.defaultRouteName));
                   },
                 ),
                 ListTile(
@@ -496,7 +460,7 @@ class PageBooking extends StatelessWidget {
   }
 }
 
-//Settings
+//Settings  ************************************************************************************
 class PageSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -514,6 +478,7 @@ class PageSettings extends StatelessWidget {
               children: <Widget>[
                 PageSettingsDesign(),
                 PageSettingsLogic(),
+                
               ],
             ),
           ),
@@ -535,13 +500,8 @@ class PageSettings extends StatelessWidget {
                   leading: Icon(Icons.home),
                   title: Text('Hjem'),
                   onTap: () {
-                    /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PageHome(
-                                user: null,
-                              )),
-                    );*/
+                    Navigator.popUntil(context,
+                        ModalRoute.withName(Navigator.defaultRouteName));
                   },
                 ),
                 ListTile(
